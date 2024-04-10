@@ -7,6 +7,7 @@ import SchedulingAlgorithms.FCFS;
 
 public class Output {
     public static void printProcess(Process[] p) {
+        
         System.out
                 .println("Process\t\tArrival Time\t\tBurst Time\t\tCompletion Time\t\tTurnaround Time\t\tWaiting Time");
         for (int i = 0; i < p.length; i++) {

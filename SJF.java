@@ -7,6 +7,17 @@ import SchedulingAlgorithms.Output;
 
 public class SJF {
 
+    public SJF(Process[] p) {
+        System.out.println("SJF of given process is:");
+
+        sjf(p);
+
+        Output op = new Output();
+        op.printProcess(p);
+        op.printAvgTAT(p);
+        op.printAvgWT(p);
+    }
+
     public static class sortByAt implements Comparator<Process> {
 
         public int compare(Process p1, Process p2) {
@@ -42,20 +53,6 @@ public class SJF {
     }
 
     public static void main(String[] args) {
-
-        // System.out.println("Scheduling Algorithm");
-
-        Input in = new Input();
-        Process[] p = in.getInput();
-
-        System.out.println("SJF of given process is:");
-
-        sjf(p);
-
-        Output op = new Output();
-        op.printProcess(p);
-        op.printAvgTAT(p);
-        op.printAvgWT(p);
 
     }
 

@@ -7,6 +7,15 @@ import SchedulingAlgorithms.Output;
 
 public class FCFS {
 
+    public FCFS(Process[] p) {
+        fcfs(p);
+        System.out.println("FCFS of given process is:");
+        Output op = new Output();
+        op.printProcess(p);
+        op.printAvgTAT(p);
+        op.printAvgWT(p);
+    }
+
     public static class sortByAt implements Comparator<Process> {
 
         public int compare(Process p1, Process p2) {
@@ -42,20 +51,6 @@ public class FCFS {
     }
 
     public static void main(String[] args) {
-
-        // System.out.println("Scheduling Algorithm");
-
-        Input in = new Input();
-        Process[] p = in.getInput();
-
-        System.out.println("FCFS of given process is:");
-
-        fcfs(p);
-        // printProcess(p);
-        Output op = new Output();
-        op.printProcess(p);
-        op.printAvgTAT(p);
-        op.printAvgWT(p);
 
     }
 

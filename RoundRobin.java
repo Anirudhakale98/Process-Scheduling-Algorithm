@@ -6,6 +6,23 @@ import SchedulingAlgorithms.Input;
 import SchedulingAlgorithms.Output;
 
 public class RoundRobin {
+    static Scanner sc = new Scanner(System.in);
+
+    public RoundRobin(Process[] p) {
+        int tq = 2;
+        System.out.println("Time Quantum:");
+        tq = sc.nextInt();
+
+        System.out.println("RoundRobin of given process is:");
+
+        roundRobin(p, tq);
+        // printProcess(p);
+        Output op = new Output();
+        op.printProcess(p);
+        op.printAvgTAT(p);
+        op.printAvgWT(p);
+
+    }
 
     public static class sortByAt implements Comparator<Process> {
 
@@ -61,21 +78,6 @@ public class RoundRobin {
     public static void main(String[] args) {
 
         // System.out.println("Scheduling Algorithm");
-        Scanner sc = new Scanner(System.in);
-        Input in = new Input();
-        Process[] p = in.getInput();
-        int tq = 2;
-        System.out.println("Time Quantum:");
-        tq = sc.nextInt();
-
-        System.out.println("RoundRobin of given process is:");
-
-        roundRobin(p, tq);
-        // printProcess(p);
-        Output op = new Output();
-        op.printProcess(p);
-        op.printAvgTAT(p);
-        op.printAvgWT(p);
 
     }
 
