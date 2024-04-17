@@ -6,6 +6,7 @@ import SchedulingAlgorithms.RoundRobin;
 import SchedulingAlgorithms.Process;
 import SchedulingAlgorithms.Input;
 import SchedulingAlgorithms.Output;
+import SchedulingAlgorithms.PriorityScheduling;
 
 public class main {
     static Scanner sc = new Scanner(System.in);
@@ -17,7 +18,8 @@ public class main {
             System.out.println("1. FCFS");
             System.out.println("2. SJF");
             System.out.println("3. Round Robin");
-            System.out.println("4. Back to main menu");
+            System.out.println("4. Priority Scheduling");
+            System.out.println("5. Back to main menu");
 
             System.out.println("Enter your choice: ");
             choice = sc.nextInt();
@@ -33,12 +35,15 @@ public class main {
                     new RoundRobin(p);
                     break;
                 case 4:
+                    new PriorityScheduling(p);
+                    break;
+                case 5:
                     break;
                 default:
                     System.out.println("Invalid choice");
             }
 
-        } while (choice != 4);
+        } while (choice != 5);
 
     }
 

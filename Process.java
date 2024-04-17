@@ -16,6 +16,8 @@ public class Process {
 
     public int watingTime;
 
+    public int priority;
+
     public Process(String id, int at, int bt) {
 
         this.process_id = id;
