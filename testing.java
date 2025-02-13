@@ -15,6 +15,5 @@ public class testing {
         System.out.println("Scheduling Algorithm");
         Process p[] = { new Process("p1", 2, 3), new Process("p2", 3, 4), new Process("p3", 4, 5) };
 
-        new PriorityScheduling(p);
     }
 }
