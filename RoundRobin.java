@@ -35,44 +35,47 @@ public class RoundRobin {
     }
 
     public static void roundRobin(Process p[], int tq) {
-        // tq : time quantum
-        Arrays.sort(p, new sortByAt());
-        Queue<Process> q = new LinkedList<Process>();
-        // Temp Burst Time array is used to make copy of burst time of each process then
-        // we have to restore it because in round robin burst time changes every time
-        int tempBurstTime[] = new int[p.length];
+        Arrays.sort(p, new sortByAt()); // Sort by Arrival Time
+        Queue<Process> q = new LinkedList<>();
+
+        int tempBurstTime[] = new int[p.length]; // Store original burst times
         for (int i = 0; i < p.length; i++) {
             tempBurstTime[i] = p[i].burstTime;
-            q.add(p[i]);
         }
 
         int time = 0;
+        int index = 0; // To track processes that have arrived
+        while (index < p.length || !q.isEmpty()) {
+            // Add all processes that have arrived by 'time'
+            while (index < p.length && p[index].arrivalTime <= time) {
+                q.add(p[index]);
+                index++;
+            }
 
-        while (!q.isEmpty()) {
-            Process temp = q.poll();
-            if (temp.arrivalTime <= time) {
-                if (temp.burstTime >= tq) {
-                    time += tq;
-                    temp.burstTime = temp.burstTime - tq;
-                    q.add(temp);
-                } else {
-                    time += temp.burstTime;
-                    temp.completionTime = time;
-                    temp.burstTime = 0;
+            if (q.isEmpty()) {
+                // If CPU is idle, move time forward
+                time = p[index].arrivalTime;
+                continue;
+            }
 
-                }
+            Process temp = q.poll(); // Get process from queue
+            int executionTime = Math.min(temp.burstTime, tq);
+            time += executionTime;
+            temp.burstTime -= executionTime;
+
+            if (temp.burstTime == 0) {
+                temp.completionTime = time; // Process finished execution
             } else {
-                q.add(temp);
-                time++;
+                q.add(temp); // Re-add to queue if it's not finished
             }
         }
 
+        // Restore original burst times and calculate TAT, WT
         for (int i = 0; i < p.length; i++) {
             p[i].burstTime = tempBurstTime[i];
             p[i].calculateTAT();
             p[i].calculateWT();
         }
-
     }
 
     public static void main(String[] args) {
